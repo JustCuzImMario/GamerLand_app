@@ -1,0 +1,25 @@
+{
+  "name": "gamerland_app",
+  "version": "1.0.0",
+  "description": "GamerLand Web Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustCuzImMario/GamerLand-Service-Layers.git"
+  },
+  "author": "Patrick Flood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustCuzImMario/GamerLand-Service-Layers/issues"
+  },
+  "homepage": "https://github.com/JustCuzImMario/GamerLand-Service-Layers#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.1.0"
+  }
+}
