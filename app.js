@@ -28,7 +28,7 @@ app.get('/games/popular', isAuthenticated, async (req, res) => {
 // Middleware function to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
     const token = req.cookies.jwt;
-  
+
     if (!token) {
       return res.status(401).send('Not authenticated');
     }
