@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const router = express.Router();
@@ -7,41 +8,9 @@ const jwt = require('jsonwebtoken');
 const uri = 'mongodb+srv://patchflood17:jDKOPluEWmU8CPiw@clustergl.niradnb.mongodb.net/gamerland_db';
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const { getPopularGames } = require('./rawg');
+const gamesRouter = require('./routes/games');
+app.use('/games', gamesRouter);
 
-
-require('dotenv').config();
-const express = require('express');
-const secretKey = process.env.SECRET_KEY;
-
-// RAWG.io API endpoint to retrieve popular games
-app.get('/games/popular', isAuthenticated, async (req, res) => {
-    try {
-      const games = await getPopularGames();
-      res.send(games);
-    } catch (error) {
-      console.log(`Error retrieving popular games from RAWG.io: ${error}`);
-      res.status(500).send('Internal Server Error');
-    }
-  });
-  
-
-// Middleware function to check if user is authenticated
-const isAuthenticated = (req, res, next) => {
-    const token = req.cookies.jwt;
-
-    if (!token) {
-      return res.status(401).send('Not authenticated');
-    }
-  
-    try {
-      const decoded = jwt.verify(token, secretKey);
-      req.userId = decoded.id;
-      next();
-    } catch (err) {
-      console.error(err);
-      return res.status(401).send('Invalid token');
-    }
-  };
   
   // Middleware function to check if user is authorized
   const isAuthorized = (req, res, next) => {
@@ -54,8 +23,6 @@ const isAuthenticated = (req, res, next) => {
   
     next();
   };
-
-
 
 // Connect to MongoDB
 client.connect(err => {
