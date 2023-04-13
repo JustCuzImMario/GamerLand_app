@@ -6,6 +6,10 @@ const Game = require('../models/game');
 const { secretKey } = require('../config');
 const rawg = require('../rawg');
 
+function search() {
+    console.log("search() function called!");
+  }
+
 // Middleware function to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -40,6 +44,9 @@ router.get('/', async (req, res) => {
       res.status(500).send('Server Error');
     }
   });
+
+
+  
   
 
 module.exports = router;
