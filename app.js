@@ -14,6 +14,8 @@ const searchRouter = require('./routes/search');
 app.use('/search', searchRouter);
 
 
+
+
   
   // Middleware function to check if user is authorized
   const isAuthorized = (req, res, next) => {

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
 const Game = require('../models/game');
 const { secretKey } = require('../config');
+const rawg = require('../rawg');
 
 // Middleware function to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
@@ -22,33 +23,18 @@ const isAuthenticated = (req, res, next) => {
     return res.status(401).send('Invalid token');
   }
 };
-const searchGames = async (query, filter) => {
-  const apiUrl = `https://api.rawg.io/api/games?search=${query}&search_precise=true&${filter}_ordering=desc`;
-  const response = await fetch(apiUrl);
-  const data = await response.json();
-  return data.results.map((game) => ({
-    gameId: game.id,
-    title: game.name,
-    description: game.description_raw,
-    genres: game.genres.map((genre) => genre.name),
-    platforms: game.platforms.map((platform) => platform.platform.name),
-    releaseDate: game.released,
-    publisher: game.publishers.map((publisher) => publisher.name).join(', '),
-    developer: game.developers.map((developer) => developer.name).join(', '),
-    rating: game.rating,
-    imageUrl: game.background_image,
-  }));
-};
 
-router.get('/', async (req, res) => {
-  const { query, filter } = req.query;
-  
+router.get('/', async (req, res, next) => {
   try {
-    const games = await searchGames(query, filter);
+    const { query, filter } = req.query;
+
+    console.log(`Received search query: ${query}`); // Log the search query to the console
+
+    const games = await rawg.searchGames(query, filter);
     res.json(games);
-  } catch (error) {
-    console.error(`Error retrieving game details from RAWG.io: ${error}`);
-    res.status(500).send('Internal Server Error');
+  } catch (err) {
+    console.error(`Error retrieving game details from RAWG.io: ${err}`);
+    next(err);
   }
 });
 
