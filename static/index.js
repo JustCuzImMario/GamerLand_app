@@ -6,39 +6,43 @@ fetch('http://localhost:3000/games/popular')
     .then(response => response.json())
     .then(data => console.log(data));
 
-const searchButton = document.getElementById('search-button');
-const searchResults = document.getElementById('search-results');
+const searchForm = document.querySelector('#search-form');
+const searchInput = document.querySelector('#search-input');
+const searchResults = document.querySelector('#search-results');
 
-searchButton.addEventListener('click', async () => {
-    const searchInput = document.getElementById('search-input').value;
+searchForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    // Send an AJAX request to the server with the search query
+    const query = searchInput.value;
+
     try {
-        const response = await fetch(`/search?query=${searchInput}`);
-        const games = await response.json();
-        console.log(`Received games: ${JSON.stringify(games)}`);
+    const response = await fetch(`/search?query=${query}`);
+    const games = await response.json();
 
-        // Clear the previous search results
-        searchResults.innerHTML = '';
+    // Clear the previous search results
+    searchResults.innerHTML = '';
 
-        // Append new elements for each game result
-        games.forEach(game => {
-            const gameElement = document.createElement('div');
-            gameElement.classList.add('game');
-            gameElement.innerHTML = `
-                <img src="${game.imageUrl}" alt="${game.title}">
-                <h3>${game.title}</h3>
-                <p>${game.description}</p>
-                <p><strong>Genres:</strong> ${game.genres.join(', ')}</p>
-                <p><strong>Platforms:</strong> ${game.platforms.join(', ')}</p>
-                <p><strong>Release Date:</strong> ${game.releaseDate}</p>
-                <p><strong>Publisher:</strong> ${game.publisher}</p>
-                <p><strong>Developer:</strong> ${game.developer}</p>
-                <p><strong>Rating:</strong> ${game.rating}/5</p>
-            `;
-            searchResults.appendChild(gameElement);
-        });
+    // Display the search results
+    games.forEach((game) => {
+        const gameContainer = document.createElement('div');
+        gameContainer.className = 'game-container';
+
+        const title = document.createElement('h3');
+        title.textContent = game.title;
+        gameContainer.appendChild(title);
+
+        const description = document.createElement('p');
+        description.textContent = game.description;
+        gameContainer.appendChild(description);
+
+        const image = document.createElement('img');
+        image.src = game.imageUrl;
+        gameContainer.appendChild(image);
+
+        searchResults.appendChild(gameContainer);
+    });
     } catch (error) {
-        console.error(`Error searching for games: ${error}`);
+    console.error(error);
     }
 });
+    
