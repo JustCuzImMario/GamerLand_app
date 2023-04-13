@@ -14,12 +14,10 @@ searchButton.addEventListener('click', () => {
 
     // Send an AJAX request to the server with the search query
     fetch(`/search?query=${searchInput}`)
-        .then(response => {
-            console.log(`Sending search query: ${searchInput}`);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(games => {
             console.log(`Received games: ${JSON.stringify(games)}`);
+
             // Clear the previous search results
             searchResults.innerHTML = '';
 
@@ -45,3 +43,4 @@ searchButton.addEventListener('click', () => {
             console.error(`Error searching for games: ${error}`);
         });
 });
+    
