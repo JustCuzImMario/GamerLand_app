@@ -10,6 +10,9 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const { getPopularGames } = require('./rawg');
 const gamesRouter = require('./routes/games');
 app.use('/games', gamesRouter);
+const searchRouter = require('./routes/search');
+app.use('/search', searchRouter);
+
 
   
   // Middleware function to check if user is authorized
