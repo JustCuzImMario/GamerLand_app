@@ -24,18 +24,23 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
+const express = require('express');
+const rawg = require('../rawg');
+
 router.get('/', async (req, res, next) => {
   try {
-    const { query, filter } = req.query;
+    const { query } = req.query;
 
     console.log(`Received search query: ${query}`); // Log the search query to the console
 
-    const games = await rawg.searchGames(query, filter);
+    const games = await rawg.searchGames(query);
     res.json(games);
   } catch (err) {
-    console.error(`Error retrieving game details from RAWG.io: ${err}`);
     next(err);
   }
 });
 
 module.exports = router;
+
+
+
