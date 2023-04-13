@@ -24,21 +24,23 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
-const express = require('express');
-const rawg = require('../rawg');
-
-router.get('/', async (req, res, next) => {
-  try {
-    const { query } = req.query;
-
-    console.log(`Received search query: ${query}`); // Log the search query to the console
-
-    const games = await rawg.searchGames(query);
-    res.json(games);
-  } catch (err) {
-    next(err);
-  }
-});
+router.get('/', async (req, res) => {
+    try {
+      const { query } = req.query;
+      const response = await axios.get('https://api.rawg.io/api/games', {
+        params: {
+          search: query,
+          key: process.env.RAWG_API_KEY
+        }
+      });
+      const { results } = response.data;
+      res.render('search', { results });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Server Error');
+    }
+  });
+  
 
 module.exports = router;
 
