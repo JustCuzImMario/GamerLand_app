@@ -2,6 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Actor&display=swap');
 
+
+
+.COLORCODES {
+    color: #77e081;
+    color: #c85c65;
+    color: #F4BC41;
+}
+
+
 /* Global Styles */
 body {
     font-family: "Actor Regular", sans-serif;
@@ -27,6 +36,7 @@ h1 {
 h2 {
     font-size: 2.5rem;
     font-family: "Miriam Libre", sans-serif;
+    color: #ddd;
 }
 
 h3 {
@@ -49,6 +59,8 @@ h6 {
     font-family: "Miriam Libre", sans-serif;
 }
 
+
+
 a {
     color: #F4BC41;
     text-decoration: none;
@@ -59,6 +71,7 @@ a:hover {
     color: #F4BC41;
     text-decoration: underline;
 }
+
 
 /* Navigation Bar Styles */
 .navbar {
@@ -158,9 +171,9 @@ button {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
-  }
+}
   
-  .game-card {
+.game-card {
     width: 300px;
     height: 400px;
     margin: 20px;
@@ -171,19 +184,19 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  
-  .game-card h2 {
+}
+
+.game-card h2 {
     margin: 0;
     font-size: 1.5rem;
     font-weight: bold;
-  }
+}
   
-  .game-card img {
+.game-card img {
     width: 100%;
     height: 70%;
     object-fit: cover;
     border-radius: 5px;
-  }
-  
+}
+
   
