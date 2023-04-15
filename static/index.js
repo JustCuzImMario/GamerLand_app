@@ -10,18 +10,19 @@ searchForm.addEventListener("submit", (event) => {
         .then((data) => {
             searchResults.innerHTML = "";
             data.results.forEach((game) => {
-        const gameCard = document.createElement("div");
-        gameCard.classList.add("game-card");
+                const gameCard = document.createElement("div");
+                gameCard.classList.add("game-card");
 
-        const gameTitle = document.createElement("h2");
-        gameTitle.innerText = game.name;
+                const gameTitle = document.createElement("h2");
+                gameTitle.innerText = game.name;
 
-        const gameCover = document.createElement("img");
-        gameCover.src = game.background_image;
+                const gameCover = document.createElement("img");
+                gameCover.src = game.background_image;
 
-        gameCard.appendChild(gameTitle);
-        gameCard.appendChild(gameCover);
-        searchResults.appendChild(gameCard);
-      });
-    });
+                gameCard.appendChild(gameTitle);
+                gameCard.appendChild(gameCover);
+                searchResults.appendChild(gameCard);
+            });
+        });
 });
+
