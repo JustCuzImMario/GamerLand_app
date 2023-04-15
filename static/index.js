@@ -1,3 +1,5 @@
+const { search } = require("../routes/games");
+
 fetch('/games')
     .then(response => response.json())
     .then(data => console.log(data));
@@ -45,4 +47,6 @@ searchForm.addEventListener('submit', async (event) => {
     console.error(error);
     }
 });
+
+export { search };
     
