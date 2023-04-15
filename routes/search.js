@@ -4,8 +4,21 @@ const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
 const Game = require('../models/game');
 const { secretKey } = require('../config');
-const rawg = require('../rawg');
+const rawg = require('../rawg')
 
+
+router.get('/search', async (req, res) => {
+    console.log('search route accessed');
+    const query = req.query.query;
+    try {
+      const games = await Game.search(query);
+      res.json(games);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
+  });
+  
 function search() {
     console.log("search() function called!");
   }
