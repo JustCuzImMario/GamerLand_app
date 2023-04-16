@@ -29,7 +29,11 @@ searchForm.addEventListener("submit", (event) => {
           gameTitle.innerText = game.name;
       
           const gameCover = document.createElement("img");
-          gameCover.src = game.background_image;
+          if (game.background_image) {
+            gameCover.src = game.background_image;
+          } else {
+            gameCover.appendChild(document.createTextNode("No Image"));
+          }
       
           gameCard.appendChild(gameTitle);
           gameCard.appendChild(gameCover);
