@@ -144,18 +144,6 @@ header img {
 }
 
 /* Body Content Styles */
-.card {
-    margin-bottom: 1.5rem;
-    border: 0;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-    font-family: "Actor Regular", sans-serif;
-}
-
-.card-img-top {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
 
 button {
     font-family: "Actor Regular", sans-serif;
@@ -180,16 +168,20 @@ button {
     margin: 20px;
     padding: 10px;
     box-sizing: border-box;
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 5px;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 10px 6px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+
 }
 
 .game-card h2 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: bold;
 }
   
