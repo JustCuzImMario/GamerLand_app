@@ -47,7 +47,7 @@ searchForm.addEventListener("submit", (event) => {
             gameCardContainer.appendChild(gameCard);
             // Add event listener to each game card
             gameCard.addEventListener('click', async () => {
-                const description = await getGameDetails(game.id, 400);
+                const description = await getGameDetails(game.id, );
                 // Create popup
                 const popup = document.createElement('div');
                 popup.classList.add('popup');
