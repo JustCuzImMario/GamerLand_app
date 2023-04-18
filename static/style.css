@@ -251,5 +251,25 @@ button:hover {
   .popup-content button:hover {
     background-color: #a17c2d;
   }
+
+  /* For screens smaller than 768px (mobile devices) */
+@media (max-width: 767px) {
+    .header {
+      background-size: cover;
+      background-position: center;
+      height: 300px; /* Set a fixed height for the header on mobile devices */
+    }
+  }
+  
+  /* For screens larger than 768px (desktop devices) */
+  @media (min-width: 768px) {
+    .header {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 500px; /* Set a larger height for the header on desktop devices */
+    }
+  }
+  
   
   
