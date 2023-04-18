@@ -133,10 +133,17 @@ a:hover {
 }
 
 /* Header Image Styles */
-header {
-    margin-bottom: 2rem;
+/* Center the search bar and button within the header */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Set the height of the header to 100% of the viewport height */
+    background-size: cover; /* Scale the background image to cover the entire header */
+    background-position: center; /* Center the background image within the header */
 }
-
+  
 header img {
     width: 100%;
     height: auto;
@@ -252,12 +259,6 @@ button:hover {
     background-color: #a17c2d;
   }
 
-  .header {
-    height: 100vh; /* Set the height of the header to 100% of the viewport height */
-    background-size: cover; /* Scale the background image to cover the entire header */
-    background-position: center; /* Center the background image within the header */
-  }
-  
   .container {
     max-width: 1200px; /* Set a max-width for the main content area */
     margin: 0 auto; /* Center the main content area within the viewport */
