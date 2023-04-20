@@ -139,9 +139,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Set the height of the header to 100% of the viewport height */
-    background-size: cover; /* Scale the background image to cover the entire header */
-    background-position: center; /* Center the background image within the header */
+    
 }
   
 header img {
