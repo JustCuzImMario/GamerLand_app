@@ -132,6 +132,10 @@ a:hover {
     margin-right: 0;
 }
 
+#menu-button:hover {
+    background-color: #c85c65; 
+  }
+
 /* Header Image Styles */
 /* Center the search bar and button within the header */
 .header {
@@ -269,7 +273,7 @@ button:hover {
     .header {
       background-size: cover;
       background-position: center;
-      height: 300px; /* Set a fixed height for the header on mobile devices */
+      height: 300px;
     }
   }
   
@@ -279,7 +283,7 @@ button:hover {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      height: 500px; /* Set a larger height for the header on desktop devices */
+      height: 500px; 
     }
   }
   
