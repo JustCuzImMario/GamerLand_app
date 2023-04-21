@@ -4,6 +4,24 @@ const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
 const MongoClient = require('mongodb').MongoClient;
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+const uri = "mongodb+srv://patchflood17:Tydetmer14!@clustergl.niradnb.mongodb.net/?retryWrites=true&w=majority"; 
+
+
+
+MongoClient.connect(url, function(err, client) {
+  if (err) throw err;
+  console.log("Database connected!");
+  
+  const db = client.db('gamerland_db');
+  const collection = db.collection('users');
+  
+  
+  app.listen(port, () => console.log(`Server running on port ${port}`));
+});
+
 
 
 
@@ -102,16 +120,6 @@ function getGameDetails(gameId, descriptionLength) {
   
 
 
-
-  
-// Connecting to MongoDB for Login and Account Creation
-
-const uri = "mongodb+srv://patchflood17:Tydetmer14!@clustergl.niradnb.mongodb.net/?retryWrites=true&w=majority"; 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log('Connected to database!');
-  // perform database operations here
-});
 
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
