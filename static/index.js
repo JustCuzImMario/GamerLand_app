@@ -98,5 +98,6 @@ function getGameDetails(gameId, descriptionLength) {
       .catch(error => console.log(error));
   }
   
- 
+
+
   
