@@ -3,11 +3,24 @@ const apiKey = "c0c4266a6e0c49218d68459d4798adc7";
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
-const MongoClient = require('mongodb').MongoClient;
-const express = require('express');
+import { MongoClient } from 'mongodb';
+import express from 'express';
 const app = express();
 const port = process.env.PORT || 3000;
 const uri = "mongodb+srv://patchflood17:Tydetmer14!@clustergl.niradnb.mongodb.net/?retryWrites=true&w=majority"; 
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+import { urlencoded, json } from 'body-parser';
+import router, { post } from './routes';
+
+app.use(urlencoded({ extended: true }));
+app.use(json());
+
+app.use('/api', router);
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
 
 
 
@@ -17,14 +30,52 @@ MongoClient.connect(url, function(err, client) {
   
   const db = client.db('gamerland_db');
   const collection = db.collection('users');
-  
+
   
   app.listen(port, () => console.log(`Server running on port ${port}`));
 });
 
+post('/register', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db('gamerland_db');
+    const collection = database.collection('users');
+    const result = await collection.insertOne(req.body);
+    res.status(200).send(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Error registering user' });
+  } finally {
+    await client.close();
+  }
+});
+
+post('/login', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db('gamerland_db');
+    const collection = database.collection('users');
+    const user = await collection.findOne({ username: req.body.username });
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+    if (user.password !== req.body.password) {
+      return res.status(401).send({ error: 'Invalid credentials' });
+    }
+    res.status(200).send(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Error logging in' });
+  } finally {
+    await client.close();
+  }
+});
+
+export default router;
 
 
 
+// RAWG API
 // Search for games
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -121,28 +172,6 @@ function getGameDetails(gameId, descriptionLength) {
 
 
 
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
 
 
 
