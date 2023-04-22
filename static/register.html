@@ -45,10 +45,12 @@
   </nav>
   <!-- END NAV BAR -->
 
+<script src="index.js"></script>
+
 <!-- Create Account Form -->
   <div class="register-container">
     <h3>Create an Account</h3>
-    <form id="register-form">
+    <form id="register-form" action="#">
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" id="email" name="email" required>
@@ -79,6 +81,56 @@
     </form>
   </div>
   <!-- END Create Account Form -->
+
+
+<script>
+  const registerForm = document.getElementById('register-form');
+
+  registerForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+    const password = document.getElementById('password').value;
+    const passwordVerify = document.getElementById('password-verify').value;
+
+    if (password !== passwordVerify) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    const user = {
+      email,
+      username,
+      firstname,
+      lastname,
+      password,
+    };
+
+    try {
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        alert('Account created successfully!');
+        window.location.href = '/login';
+      } else {
+        const error = await response.json();
+        alert(error.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Failed to create account');
+    }
+  });
+</script>
 
 
 </body>

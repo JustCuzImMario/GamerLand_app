@@ -1,79 +1,8 @@
 const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-const apiKey = "c0c4266a6e0c49218d68459d4798adc7";
+const apiKey = "c0c4266a6e0c49218d68459d4798adc7"
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
-import { MongoClient } from 'mongodb';
-import express from 'express';
-const app = express();
-const port = process.env.PORT || 3000;
-const uri = "mongodb+srv://patchflood17:Tydetmer14!@clustergl.niradnb.mongodb.net/?retryWrites=true&w=majority"; 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-import { urlencoded, json } from 'body-parser';
-import router, { post } from './routes';
-
-app.use(urlencoded({ extended: true }));
-app.use(json());
-
-app.use('/api', router);
-
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
-});
-
-
-
-
-MongoClient.connect(url, function(err, client) {
-  if (err) throw err;
-  console.log("Database connected!");
-  
-  const db = client.db('gamerland_db');
-  const collection = db.collection('users');
-
-  
-  app.listen(port, () => console.log(`Server running on port ${port}`));
-});
-
-post('/register', async (req, res) => {
-  try {
-    await client.connect();
-    const database = client.db('gamerland_db');
-    const collection = database.collection('users');
-    const result = await collection.insertOne(req.body);
-    res.status(200).send(result);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Error registering user' });
-  } finally {
-    await client.close();
-  }
-});
-
-post('/login', async (req, res) => {
-  try {
-    await client.connect();
-    const database = client.db('gamerland_db');
-    const collection = database.collection('users');
-    const user = await collection.findOne({ username: req.body.username });
-    if (!user) {
-      return res.status(404).send({ error: 'User not found' });
-    }
-    if (user.password !== req.body.password) {
-      return res.status(401).send({ error: 'Invalid credentials' });
-    }
-    res.status(200).send(user);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Error logging in' });
-  } finally {
-    await client.close();
-  }
-});
-
-export default router;
-
-
 
 // RAWG API
 // Search for games
