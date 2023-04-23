@@ -4,6 +4,8 @@ const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
 
+
+
 // RAWG API
 // Search for games
 searchForm.addEventListener("submit", (event) => {
@@ -47,7 +49,7 @@ searchForm.addEventListener("submit", (event) => {
             gameCardContainer.appendChild(gameCard);
             // Add event listener to each game card
             gameCard.addEventListener('click', async () => {
-                const description = await getGameDetails(game.id, );
+                const description = await getGameDetails(game.id, 475);
                 // Create popup
                 const popup = document.createElement('div');
                 popup.classList.add('popup');
@@ -62,7 +64,14 @@ searchForm.addEventListener("submit", (event) => {
                 const popupDescription = document.createElement('p');
                 popupDescription.textContent = description + '...';
                 popupContent.appendChild(popupDescription);
-                // Add close button
+                // Add 'read more' button
+                const readMoreButton = document.createElement('button');
+                readMoreButton.textContent = 'Read More';
+                readMoreButton.addEventListener('click', () => {
+                  window.location.href = `readmore.html?id=${game.id}`;
+                });
+                popupContent.appendChild(readMoreButton);
+                // Add 'close' button
                 const closeButton = document.createElement('button');
                 closeButton.textContent = 'Close';
                 closeButton.addEventListener('click', () => {
@@ -88,6 +97,7 @@ searchForm.addEventListener("submit", (event) => {
     });
 });
 
+
 // Get game details
 function getGameDetails(gameId, descriptionLength) {
     const API_URL = `https://api.rawg.io/api/games/${gameId}?key=${apiKey}`;
@@ -97,10 +107,20 @@ function getGameDetails(gameId, descriptionLength) {
       .then(data => data.description_raw.substring(0, descriptionLength))
       .catch(error => console.log(error));
   }
+
+
+// Read game details from URL and display them
+const params = new URLSearchParams(window.location.search);
+const gameId = params.get('id');
+if (gameId) {
+  getGameDetails(gameId, Infinity).then(description => {
+    const gameDetailsContainer = document.querySelector('#game-details');
+    const gameDescription = document.createElement('p');
+    gameDescription.textContent = description;
+    gameDetailsContainer.appendChild(gameDescription);
+  });
+}
   
-
-
-
 
 
 
