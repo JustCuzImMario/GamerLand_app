@@ -109,18 +109,6 @@ function getGameDetails(gameId, descriptionLength) {
   }
 
 
-// Read game details from URL and display them
-const params = new URLSearchParams(window.location.search);
-const gameId = params.get('id');
-if (gameId) {
-  getGameDetails(gameId, Infinity).then(description => {
-    const gameDetailsContainer = document.querySelector('#game-details');
-    const gameDescription = document.createElement('p');
-    gameDescription.textContent = description;
-    gameDetailsContainer.appendChild(gameDescription);
-  });
-}
-  
 
 
 
