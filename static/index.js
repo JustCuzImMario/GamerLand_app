@@ -47,36 +47,55 @@ searchForm.addEventListener("submit", (event) => {
             gameCard.appendChild(gameTitle);
             gameCard.appendChild(gameCover);
             gameCardContainer.appendChild(gameCard);
+
             // Add event listener to each game card
             gameCard.addEventListener('click', async () => {
                 const description = await getGameDetails(game.id, 475);
+
                 // Create popup
                 const popup = document.createElement('div');
                 popup.classList.add('popup');
+
                 // Add popup content
                 const popupContent = document.createElement('div');
                 popupContent.classList.add('popup-content');
+
                 // Add game title
                 const popupTitle = document.createElement('h2');
                 popupTitle.textContent = game.name;
                 popupContent.appendChild(popupTitle);
+
                 // Add game description
                 const popupDescription = document.createElement('p');
                 popupDescription.textContent = description + '...';
                 popupContent.appendChild(popupDescription);
-                // Add 'read more' button
+
+                  // Add 'read more' button
                 const readMoreButton = document.createElement('button');
                 readMoreButton.textContent = 'Read More';
                 readMoreButton.addEventListener('click', () => {
-                  window.location.href = `readmore.html?id=${game.id}`;
+    
+                  // Get the game ID and full description from the game card
+                  const gameId = game.id;
+                  const fullDescription = description;
+  
+                  // Set the game ID and full description as query parameters in the URL for readmore.html
+                  const url = `readmore.html?id=${gameId}&description=${encodeURIComponent(fullDescription)}`;
+  
+                  // Redirect the user to readmore.html with the query parameters in the URL
+                  window.location.href = url;
+
                 });
                 popupContent.appendChild(readMoreButton);
+
+            
                 // Add 'close' button
                 const closeButton = document.createElement('button');
                 closeButton.textContent = 'Close';
                 closeButton.addEventListener('click', () => {
-                    popup.remove();
+                  popup.remove();
                 });
+
                 // Append popup content and close button to popup
                 popupContent.appendChild(closeButton);
                 popup.appendChild(popupContent);
