@@ -6,6 +6,8 @@ const searchResults = document.querySelector("#search-results");
 
 
 
+
+
 // RAWG API
 // Search for games
 searchForm.addEventListener("submit", (event) => {
@@ -70,25 +72,6 @@ searchForm.addEventListener("submit", (event) => {
                 popupDescription.textContent = description + '...';
                 popupContent.appendChild(popupDescription);
 
-                  // Add 'read more' button
-                const readMoreButton = document.createElement('button');
-                readMoreButton.textContent = 'Read More';
-                readMoreButton.addEventListener('click', () => {
-    
-                  // Get the game ID and full description from the game card
-                  const gameId = game.id;
-                  const fullDescription = description;
-  
-                  // Set the game ID and full description as query parameters in the URL for readmore.html
-                  const url = `readmore.html?id=${gameId}&description=${encodeURIComponent(fullDescription)}`;
-  
-                  // Redirect the user to readmore.html with the query parameters in the URL
-                  window.location.href = url;
-
-                });
-                popupContent.appendChild(readMoreButton);
-
-            
                 // Add 'close' button
                 const closeButton = document.createElement('button');
                 closeButton.textContent = 'Close';
@@ -104,6 +87,7 @@ searchForm.addEventListener("submit", (event) => {
         });
         // Append game cards to search results
         searchResults.appendChild(gameCardContainer);
+        
 
       } else {
         searchResults.innerHTML = "No games found!";
