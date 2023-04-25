@@ -1,10 +1,8 @@
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-const apiKey = "c0c4266a6e0c49218d68459d4798adc7"
+const proxyUrl = "http://localhost:3000/";
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
-
-
+const apiKey = "c0c4266a6e0c49218d68459d4798adc7"
 
 
 
@@ -13,7 +11,7 @@ const searchResults = document.querySelector("#search-results");
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const gameName = searchInput.value;
-  const apiUrl = `${proxyUrl}https://api.rawg.io/api/games?search=${gameName}&key=${apiKey}`;
+  const apiUrl = `https://api.rawg.io/api/games?search=${gameName}&key=${apiKey}`;
 
   fetch(apiUrl)
     // Check for errors
@@ -102,13 +100,16 @@ searchForm.addEventListener("submit", (event) => {
 
 
 // Get game details
-function getGameDetails(gameId, descriptionLength) {
+async function getGameDetails(gameId, descriptionLength) {
     const API_URL = `https://api.rawg.io/api/games/${gameId}?key=${apiKey}`;
   
-    return fetch(API_URL)
-      .then(response => response.json())
-      .then(data => data.description_raw.substring(0, descriptionLength))
-      .catch(error => console.log(error));
+    try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    return data.description_raw.substring(0, descriptionLength);
+  } catch (error) {
+    return console.log(error);
+  }
   }
 
 
