@@ -11,6 +11,8 @@ const port = process.env.PORT || 3000;
 const url = process.env.MONGODB_URL;
 const apiKey = process.env.RAWG_API_KEY;
 
+
+
 // Enable CORS
 app.use(cors());
 
@@ -71,4 +73,61 @@ app.get('/games/:id', async (req, res) => {
 });
 
 
-console.log('Server is running');
+console.log('Server is running')
+
+
+// User Schema
+const userSchema = new mongoose.Schema({
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  });
+  
+const User = mongoose.model('User', userSchema);
+
+
+// Register route
+app.post('/register', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const user = new User({ username, password });
+      await user.save();
+      res.status(201).send('User created');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error registering user');
+    }
+  });
+
+
+// Login route
+app.post('/login', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(401).send('Username or password is incorrect');
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).send('Username or password is incorrect');
+      }
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
+      res.send('Logged in');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error logging in user');
+    }
+  });
+  
+  

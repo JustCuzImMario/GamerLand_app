@@ -6,8 +6,11 @@
 
 .COLORCODES {
     color: #77e081;
+    color: #4fac58;
     color: #c85c65;
+    color: #99363f;
     color: #F4BC41;
+    color: #a17c2d;
 }
 
 
@@ -127,6 +130,14 @@ a:hover {
     font-family: "Actor Regular", sans-serif;
 }
 
+#navlog{
+    color: #77e081;
+}
+
+#navlog:hover {
+    color: #4fac58;
+}
+
 .form-inline .form-control {
     width: 100%;
     margin-right: 0;
@@ -135,6 +146,9 @@ a:hover {
 #menu-button:hover {
     background-color: #403f3f; 
   }
+
+
+/* Search Bar Styles */
 
 .search-container{
     display: flex;
@@ -192,7 +206,7 @@ button:hover {
 .game-card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-gap: 8px;
     overflow-x: auto;
     max-width: 100%;
 }
@@ -273,21 +287,45 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 .popup-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 80%;
     max-width: 300px;
+    max-height: 80%;
+    overflow: hidden;
     background-color: #fff;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.popup-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    z-index: 1;
+  }
+
+.popup-scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 12px;
 }
 
 .popup-content h2 {
     font-size: 30px;
     margin-bottom: 20px;
     color: #000000;
+    text-align: center;
 }
 
 .popup-content p {
@@ -365,7 +403,7 @@ button:hover {
 }
   
 
-  /* Login Form */
+/* Login Form */
 #login-form {
     max-width: 400px;
     margin: 0 auto;
@@ -479,7 +517,7 @@ small.form-text {
     color: #F4BC41;
 }
 
-button[type="submit"] {
+input[type="submit"] {
     display: block;
     padding: 10px;
     border: none;

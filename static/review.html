@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GamerLand</title>
+    <title>Reviews | GamerLand</title>
     <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Actor&display=swap" rel="stylesheet">
 
@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+
+
 <body>
-    <!-- Navigation Bar -->
+    <!-- NAV BAR -->
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="index.html"><img src="../images/GamerLandLogo.png" alt="Home" style="width: 60px; height: 60px;"></a>
         <button class="navbar-toggler" id="menu-button" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,37 +25,40 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Explore</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="search.html">Game Search</a></li>
-                        <li><a class="dropdown-item" href="#">My Ratings &amp; Reviews</a></li>
-                        <li><a class="dropdown-item" href="#">Community Ratings &amp; Reviews</a></li>
-                    </ul>
+                    <a class="nav-link" href="/static/search.html">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/rate.html">Rate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/review.html">Review</a>
                 </li>
             </ul>
-    
+            
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a id="navlog" class="nav-link" href="login.html">Login</a>
                 </li>
             </ul>
         </div>
     </nav>
 
+    <!-- END OF NAV BAR-->
+
+
+
+    <h2>REVIEWS COMING SOON</h2>
+
+
+
+
+    <!-- Header Image -->
+    <header>
+        <img src="../images/GamerLandHeader.png" alt="GamerLand" class="img-fluid">
+
+    </header>
+
     <!-- Body Content -->
-
-    <div class="search-container">
-        <form id="search-form">
-          <input type="text" id="search-input" placeholder="Search Game Title...">
-          <button id="search-button">Search</button>
-        </form>
-    </div>
-
-
-
-    <script src="index.js"></script>
-
-
 
 
 </body>

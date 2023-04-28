@@ -2,9 +2,12 @@
   "name": "gamerland_app",
   "version": "1.0.0",
   "description": "GamerLand Web Application",
-  "main": "app.js",
+  "main": "index.js",
+  "type": "commonjs",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "proxy": "https://localhost:3000",
+    "dev": "npm run development"
   },
   "repository": {
     "type": "git",
@@ -19,6 +22,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "hbs": "^4.2.0",
@@ -28,6 +32,9 @@
     "node-fetch": "^3.3.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.22"
   }

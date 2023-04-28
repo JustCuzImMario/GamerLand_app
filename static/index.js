@@ -1,9 +1,8 @@
-const proxyUrl = "http://localhost:3000/";
+const proxyUrl = "https://localhost:3000/";
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
-const apiKey = "c0c4266a6e0c49218d68459d4798adc7"
-
+const apiKey = "c0c4266a6e0c49218d68459d4798adc7";
 
 
 // RAWG API
@@ -50,7 +49,7 @@ searchForm.addEventListener("submit", (event) => {
 
             // Add event listener to each game card
             gameCard.addEventListener('click', async () => {
-                const description = await getGameDetails(game.id, 475);
+                const description = await getGameDetails(game.id);
 
                 // Create popup
                 const popup = document.createElement('div');
@@ -60,15 +59,14 @@ searchForm.addEventListener("submit", (event) => {
                 const popupContent = document.createElement('div');
                 popupContent.classList.add('popup-content');
 
+                // Add fixed header container
+                const popupHeader = document.createElement('div');
+                popupHeader.classList.add('popup-header');
+
                 // Add game title
                 const popupTitle = document.createElement('h2');
                 popupTitle.textContent = game.name;
                 popupContent.appendChild(popupTitle);
-
-                // Add game description
-                const popupDescription = document.createElement('p');
-                popupDescription.textContent = description + '...';
-                popupContent.appendChild(popupDescription);
 
                 // Add 'close' button
                 const closeButton = document.createElement('button');
@@ -76,6 +74,24 @@ searchForm.addEventListener("submit", (event) => {
                 closeButton.addEventListener('click', () => {
                   popup.remove();
                 });
+
+                popupHeader.appendChild(closeButton);
+
+                // Append fixed header and scrollable content to popup
+                popupContent.appendChild(popupHeader);
+
+                const popupScrollableContent = document.createElement('div');
+                popupScrollableContent.classList.add('popup-scrollable-content');
+
+                // Add game description to scrollable content
+                const popupDescription = document.createElement('p');
+                popupDescription.textContent = description;
+                popupScrollableContent.appendChild(popupDescription);
+
+                popupContent.appendChild(popupScrollableContent);
+
+                popup.appendChild(popupContent);
+                document.body.appendChild(popup);
 
                 // Append popup content and close button to popup
                 popupContent.appendChild(closeButton);
@@ -110,10 +126,4 @@ async function getGameDetails(gameId, descriptionLength) {
   } catch (error) {
     return console.log(error);
   }
-  }
-
-
-
-
-
-  
+};
