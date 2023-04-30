@@ -1,8 +1,8 @@
-const proxyUrl = "https://localhost:3000/";
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
 const apiKey = "c0c4266a6e0c49218d68459d4798adc7";
+const userRating = 3; // default value 
 
 
 // RAWG API
@@ -41,6 +41,7 @@ searchForm.addEventListener("submit", (event) => {
                 } else {
                 gameCover.appendChild(document.createTextNode("No Image"));
                 }
+
 
             // Append game title and cover to game card
             gameCard.appendChild(gameTitle);

@@ -4,10 +4,16 @@ import morgan from 'morgan';
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // Use the morgan middleware to log requests
 app.use(morgan('dev'));
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 
 app.use(_json());
 app.use(urlencoded({ extended: false }));
