@@ -2,7 +2,6 @@ const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
 const apiKey = "c0c4266a6e0c49218d68459d4798adc7";
-const userRating = 3; // default value 
 
 
 // RAWG API
@@ -75,8 +74,8 @@ searchForm.addEventListener("submit", (event) => {
                 closeButton.addEventListener('click', () => {
                   popup.remove();
                 });
-
                 popupHeader.appendChild(closeButton);
+
 
                 // Append fixed header and scrollable content to popup
                 popupContent.appendChild(popupHeader);
@@ -98,8 +97,10 @@ searchForm.addEventListener("submit", (event) => {
                 popupContent.appendChild(closeButton);
                 popup.appendChild(popupContent);
                 document.body.appendChild(popup);
+
+                
+              });
             });
-        });
         // Append game cards to search results
         searchResults.appendChild(gameCardContainer);
         
@@ -126,5 +127,18 @@ async function getGameDetails(gameId, descriptionLength) {
     return data.description_raw.substring(0, descriptionLength);
   } catch (error) {
     return console.log(error);
+  }
+};
+
+// Get game stores
+async function getGameStores(gameId) {
+  const API_URL = `https://api.rawg.io/api/games/${gameId}/stores?key=${apiKey}`;
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 };
