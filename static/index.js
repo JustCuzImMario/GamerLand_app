@@ -1,7 +1,7 @@
 const searchForm = document.querySelector("#search-form");
 const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector("#search-results");
-const apiKey = "c0c4266a6e0c49218d68459d4798adc7";
+const apiKey = RAWG_API_KEY;
 
 
 // RAWG API
@@ -76,7 +76,6 @@ searchForm.addEventListener("submit", (event) => {
                 });
                 popupHeader.appendChild(closeButton);
 
-
                 // Append fixed header and scrollable content to popup
                 popupContent.appendChild(popupHeader);
 
@@ -98,7 +97,6 @@ searchForm.addEventListener("submit", (event) => {
                 popup.appendChild(popupContent);
                 document.body.appendChild(popup);
 
-                
               });
             });
         // Append game cards to search results
@@ -128,6 +126,7 @@ async function getGameDetails(gameId, descriptionLength) {
   } catch (error) {
     return console.log(error);
   }
+  
 };
 
 // Get game stores
