@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "GamerLand Web Application",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
     "devStart": "nodemon server.js",
     "proxy": "https://localhost:3000",
@@ -29,6 +28,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.3.0",
     "mongoose": "^7.0.5",
+    "morgan": "^1.10.0",
     "node-fetch": "^3.3.1"
   },
   "devDependencies": {
